@@ -9,7 +9,7 @@ export class MailProvider implements IMailProvider{
 
    constructor(){
     this.transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'smtp.office365.com',
         port: 587,
         auth: { 
             user: process.env.EMAIL_MAIL,
@@ -30,7 +30,7 @@ export class MailProvider implements IMailProvider{
             },
             subject: message.subject,
             html: message.body,
-            // attachments: message.attachments
+            attachments: message.attachments
         });
 
         
