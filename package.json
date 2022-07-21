@@ -5,6 +5,7 @@
   "dependencies": {
     "@prisma/client": "^4.0.0",
     "@types/nodemailer": "^6.4.4",
+    "dayjs": "^1.11.3",
     "dotenv": "^16.0.1",
     "handlebars": "^4.7.7",
     "node-schedule": "^2.1.0",
