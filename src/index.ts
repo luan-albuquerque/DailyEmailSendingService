@@ -5,8 +5,8 @@ import { SendScheduledEmailService } from './services/SendScheduledEmailService'
 
 const rule = new schedule.RecurrenceRule();
 
-rule.hour = 16;
-rule.minute = 55;
+rule.hour = 6;
+rule.minute = 0;
 rule.tz = 'America/Manaus';
 
 const mailProvider = new MailProvider();
