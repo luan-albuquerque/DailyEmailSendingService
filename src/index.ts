@@ -13,10 +13,10 @@ const mailProvider = new MailProvider();
 const reportStartupRepositoryInPrisma = new ReportStartupRepositoryInPrisma()
 const sendScheduledEmailService = new SendScheduledEmailService(reportStartupRepositoryInPrisma,mailProvider);
 
-// const job = schedule.scheduleJob(rule, async function(res){
+const job = schedule.scheduleJob(rule, async function(res){
 
     sendScheduledEmailService.execute();
 
-// });
+});
 
 

@@ -20,10 +20,7 @@ export class MailProvider implements IMailProvider{
 
     async sendMail(message: IMessage): Promise<void> {
        const info = await this.transporter.sendMail({
-            to:{
-                name: message.to.name,
-                address: message.to.email,
-            },
+            to: message.to.email,
             from: {
                 name: message.from.name,
                 address: message.from.email,

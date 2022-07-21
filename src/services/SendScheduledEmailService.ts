@@ -57,7 +57,7 @@ const dataAnterior = dayjs().locale('pt-br').subtract(28, 'hours').format('DD/MM
         }, 
         to:{
             name: 'Colaboradores SGQ',
-            email: 'luan.santos@tutiplast.com.br',
+            email: ['luan.santos@tutiplast.com.br', 'william.almeida@tutiplast.com.br','phellipe.dinardi@tutiplast.com.br'],
           
         },
         subject: `Relatorio de Startups | ${dataAnterior} - ${dataAtual}` , 
