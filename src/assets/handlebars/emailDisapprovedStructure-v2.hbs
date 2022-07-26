@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    color: #636363;
+}
+
+table,
+th,
+td {
+    border: 1px solid #636363;
+    border-collapse: collapse;
+}
+
+.title {
+    height: 68.8px;
+    text-align: center;
+    font-size: 20.8px;
+}
+
+.title-date {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.subtitle {
+    height: 68.8px;
+    font-size: 16px;
+}
+
+.subtitle td {
+    font-weight: 600;
+    padding-left: 20px;
+}
+
+.content td {
+    padding: 20px;
+    border: none;
+}
+
+.content table {
+    border: 2px solid #EDEDED;
+    text-align: center;
+}
+
+.content table th {
+    border: none;
+    height: 28px;
+}
+
+.footer td {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.image {
+    float: right;
+    width: 167px;
+    height: 50px;
+}
+
+    </style>
+</head>
+
+<body>
+    <table border="1" width="100%">
+
+        <tr class="title">
+            <th colspan="2">SGQ</th>
+            <th colspan="2">Relatório de Startups Realizadas nas Últimas 24H</th>
+            <th colspan="2" class="title-date">Data: {{dataAnterior}}</th>
+        </tr>
+
+        <tr class="subtitle">
+            <td colspan="6">Status do Relatório</td>
+        </tr>
+
+        <tr class="content">
+            <td colspan="6" class="content-internal">
+                <table width="100%">
+                    <tr style="background-color: #EDEDED;">
+                        <th>Qtde. Start-Up</th>
+                        <th>Aprovados</th>
+                        <th>Aprovados Condicionalmente</th>
+                        <th>Reprovados</th>
+                        <th>% de Aprovadas</th>
+                        <th style="color: #FF5349;">% de Reprovadas</th>
+                    </tr>
+                    <tr>
+                        <td>{{total}}</td>
+                        <td>{{ approved }}</td>
+                        <td>{{ conditionallyApproved  }}</td>
+                        <td>{{ disapproved}}</td>
+                        <td>{{approvedAllInPorc}}%</td>
+                        <td style="color: #FF5349;">{{disapprovedInPorc}}%</td>
+                    </tr>
+
+
+                </table>
+            </td>
+        </tr>
+
+        <tr class="subtitle">
+            <td colspan="6">Relatório de Startups Reprovados</td>
+        </tr>
+
+        <tr class="content">
+            <td colspan="6" class="content-internal">
+                <table width="100%">
+                    <tr style="background-color: #EDEDED;">
+                        <th>Cód-Startup</th>
+                        <th>Ordem de Produção</th>
+                        <th>Produto</th>
+                        <th>Cliente</th>
+                        <th>Hora de Reprovaçao</th>
+                        <th>Máquina</th>
+                        <th style="color: #FF5349;">Motivo de Reprovação</th>
+                    </tr>
+
+                  {{#each startupDisapproved}}
+                  {{>startup startup=. }}
+                  {{/each}}
+
+
+                </table>
+            </td>
+        </tr>
+
+        <tr class="subtitle">
+            <td colspan="6">Relatório de Startups Aprovadas Condicionalmente </td>
+        </tr>
+
+        <tr class="content">
+            <td colspan="6" class="content-internal">
+                <table width="100%">
+                    <tr style="background-color: #EDEDED;">
+                        <th>Cód-Startup</th>
+                        <th>Ordem de Produção</th>
+                        <th>Produto</th>
+                        <th>Cliente</th>
+                        <th>Hora de Aprovação</th>
+                        <th>Máquina</th>
+                        <th style="color: #26c033;">Aprovação Condicional</th>
+                    </tr>
+                      
+                  {{#each startupAccomplished}}
+                  {{>startupApproved startupApproved=. }}
+                  {{/each}}
+
+
+                </table>
+            </td>
+        </tr>
+
+    <tr class="footer">
+
+            <td colspan="" style="text-align:left">
+              <img  src="cid:unique@cid" >
+            </td>
+            
+            <td colspan="3" style="text-align:center"> Tutilabs e todas as marcas associadas são marcas da Tutiplast</td>
+
+            <td colspan="" style="text-align:right">
+                <img  src="cid:unique2@cid" >
+            </td>
+    </tr>
+
+
+    </table>
+</body>
+
+</html>

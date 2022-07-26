@@ -54,7 +54,8 @@ export interface IListReportStartupDTO{
                  
                 },
                 
-                final_time: Date,
+                start_time: Date,
+                final_time?: Date,
                 report_startup_fill?: {
                     default_questions_responses: IDefault_questions_responses[] ,
                     specific_questions_responses: ISpecific_questions_responses,

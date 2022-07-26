@@ -38,7 +38,7 @@ class ReportStartupRepositoryInPrisma implements IReportStartupRepositoryInPrism
                     }
                 },
                 
-                final_time: true,
+                start_time: true,
                 report_startup_fill: {
                     include: {
                         default_questions_responses: true,
@@ -58,16 +58,16 @@ class ReportStartupRepositoryInPrisma implements IReportStartupRepositoryInPrism
             },
             where: {
                 filled: true,
-                open: false,
+                // open: true,
                 fk_status: 2,
                 AND: [
                     { 
-                     final_time: {
+                     start_time: {
                         gte: dataAnterior,
                     }
                    },
                     { 
-                      final_time: {
+                      start_time: {
                         lte:  dataAtual,
                      }
                     }
@@ -109,25 +109,22 @@ class ReportStartupRepositoryInPrisma implements IReportStartupRepositoryInPrism
                      }
                  },
                  
-                 final_time: true
+                 start_time: true
              },
              where: {
                  filled: true,
-                 open: false,
+                //  open: true,
                  status:{
-                    OR: [
-                        { id: 1},
-                        { id: 3}
-                    ]
+                      id: 1
                  },
                  AND: [
                     { 
-                     final_time: {
+                     start_time: {
                         gte: dataAnterior,
                     }
                    },
                     { 
-                      final_time: {
+                      start_time: {
                         lte:  dataAtual,
                      }
                     }
@@ -137,6 +134,69 @@ class ReportStartupRepositoryInPrisma implements IReportStartupRepositoryInPrism
          })
      }
 
+
+      
+     async listStartupConditionallyApprovedAndClosed(): Promise<IListReportStartupDTO[]> {
+        const dataAtual = new Date(dayjs().locale('pt-br').subtract(4,'hour').format('YYYY-MM-DDTHH:mm:ssZ'))
+        const dataAnterior = new Date(dayjs().locale('pt-br').subtract(28, 'hours').format('YYYY-MM-DDTHH:mm:ss'))
+    
+        return prismaClient.reportStartup.findMany({
+             select: {
+                 open: true,
+                 code_startup: true,
+                 status: {
+                    select:{
+                        id: true,
+                        description: true,
+                    }
+                 },
+                 op:{
+                     select:{
+                         client: true,
+                         code_op: true,
+                         code_product: true,
+                         desc_product: true,
+                         machine: true,
+                         product_mold: true,
+ 
+                     }
+                 },
+                 userThatFill:{
+                     select:{
+                         name: true,
+                     }
+                 },
+                 
+                 start_time: true,
+                 report_startup_fill: {
+                    include: {
+                        default_questions_responses: true,
+                        specific_questions_responses: true
+                    },
+                },
+             },
+             where: {
+                filled: true,
+                // open: true,
+                 status:{
+                  id: 3
+                 },
+                 AND: [
+                    { 
+                     start_time: {
+                        gte: dataAnterior,
+                    }
+                   },
+                    { 
+                      start_time: {
+                        lte:  dataAtual,
+                     }
+                    }
+                   
+                  ]
+             }
+         })
+     }
 
 }
 
