@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { log } from "handlebars";
 import { IFillReportStartupDTO } from "../dtos/IFillReportStartupDTO";
 import { IListReportStartupDTO } from "../dtos/IListReportStartupDTO";
 
@@ -20,6 +21,7 @@ import { IListReportStartupDTO } from "../dtos/IListReportStartupDTO";
 
        return verifyStatus
    }
+
    
     function determineStatusSpecificQuestions({specific_questions}: IFillReportStartupDTO){
       let verifyStatus = { message: "", question: "" };
@@ -69,13 +71,13 @@ import { IListReportStartupDTO } from "../dtos/IListReportStartupDTO";
 async function FinalResultReportStartupDisapproved(startupDisapproved: IListReportStartupDTO[]){
    
    var data = [] 
-
+  
    await Promise.all(
  
    data =  startupDisapproved.map( (item) => {
 
       const default_questions = JSON.parse(item.report_startup_fill[0].default_questions_responses[0].default_questions);
-      const specific_questions = JSON.parse(item.report_startup_fill[0].specific_questions_responses.specific_questions);
+      const specific_questions = JSON.parse(item.report_startup_fill[0].specific_questions_responses.specific_questions) || [];
   
       const  default_q =   DetermineReportStartupDisapproved().determineStatusDefaultQuestions({default_questions});
       const specific_q =   DetermineReportStartupDisapproved().determineStatusSpecificQuestions({specific_questions});
@@ -88,7 +90,7 @@ async function FinalResultReportStartupDisapproved(startupDisapproved: IListRepo
           desc_product: item.op.desc_product,
           client: item.op.client,
           machine: item.op.machine,
-          final_time: dayjs(item.final_time).format('DD/MM/YYYY HH:mm:ss'),
+          start_time: dayjs(item.start_time).format('DD/MM/YYYY HH:mm:ss'),
           default_questions : default_q,
           specific_questions : specific_q,
           metrology:  metro,
